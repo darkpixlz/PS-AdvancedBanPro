@@ -44,7 +44,7 @@ if require(script.Configuration).AppealPlaceID <= 10 then
 	task.spawn(function()
 		for i = 1,100 do
 			warn("CRITICAL: APPEALING IS NOT CONFIGURED PROPERLY!!!\nCONFIGURE IT, OR ELSE PLAYERS WILL BE BANNED!!!!!")
-			task.wait(.5)
+			task.wait(.01)
 		end
 	end)
 end
@@ -191,7 +191,7 @@ local function SendWebhook(Type,Title,Body, FieldName,FieldValue, Red)
 	end
 	local Color = Heat({Red,137,34})
 	if Type == "BanJoin" then
-		local url = ""
+		local url = require(script.Configuration).BanJoinsURLs[math.random(1, #require(script.Configuration).BanJoinsURLs)]
 
 		local data = 
 			{
@@ -224,7 +224,7 @@ local function SendWebhook(Type,Title,Body, FieldName,FieldValue, Red)
 			}
 		HttpService:PostAsync(url,HttpService:JSONEncode(data))
 	elseif Type == "Ban" then
-		local url = ""
+		local url = require(script.Configuration).BanWebhookURLs[math.random(1, #require(script.Configuration).BanWebhookURLs)]
 
 		local data = 
 			{
@@ -258,7 +258,7 @@ local function SendWebhook(Type,Title,Body, FieldName,FieldValue, Red)
 		HttpService:PostAsync(url,HttpService:JSONEncode(data))
 
 	elseif Type == "AttemptedBan" then
-		local url = ""
+		local url = require(script.Configuration).ExploitsDetectedURLs[math.random(1, #require(script.Configuration).ExploitsDetectedURLs)]
 
 		local data = 
 			{
